@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canadian Financial Market Report - Year-End 2025</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #c53030;
+            --bg: #f7fafc;
+            --card-bg: #ffffff;
+            --text: #2d3748;
+            --text-light: #718096;
+            --border: #e2e8f0;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        header .date {
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        .executive-summary {
+            background: var(--card-bg);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .executive-summary h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .metric-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .metric-card .label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .metric-card.positive .value { color: var(--success); }
+        .metric-card.negative .value { color: var(--danger); }
+        .metric-card.neutral .value { color: var(--warning); }
+
+        section {
+            background: var(--card-bg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        section h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        section h3 {
+            color: var(--secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        tr:hover {
+            background: var(--bg);
+        }
+
+        .risk-item, .opportunity-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+
+        .risk-item {
+            background: #fff5f5;
+            border-left: 3px solid var(--danger);
+        }
+
+        .opportunity-item {
+            background: #f0fff4;
+            border-left: 3px solid var(--success);
+        }
+
+        .risk-item h4 { color: var(--danger); }
+        .opportunity-item h4 { color: var(--success); }
+
+        .sector-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sector-card h3 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-overweight { background: #c6f6d5; color: #22543d; }
+        .badge-neutral { background: #fefcbf; color: #744210; }
+        .badge-underweight { background: #fed7d7; color: #742a2a; }
+        .badge-selective { background: #e9d8fd; color: #44337a; }
+
+        .sources {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .sources h3 {
+            margin-bottom: 1rem;
+        }
+
+        .sources a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .sources a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8rem; }
+            .container { padding: 1rem; }
+            section { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Canadian Financial Market Report</h1>
+        <div class="subtitle">Comprehensive Year-End Analysis 2025</div>
+        <div class="date">December 23, 2025</div>
+    </header>
+
+    <div class="container">
+        <div class="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>As 2025 draws to a close, Canada's financial markets present a compelling picture of resilience amid significant headwinds. The TSX has delivered one of its strongest years since 2009, with gains approaching 30%, even as the broader economy grapples with U.S. trade protectionism and structural adjustment. The Bank of Canada has largely completed its easing cycle, the Canadian dollar has stabilized, and several key sectors offer both opportunities and risks heading into 2026.</p>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card positive">
+                <div class="value">+29%</div>
+                <div class="label">TSX Year-to-Date Return</div>
+            </div>
+            <div class="metric-card neutral">
+                <div class="value">2.25%</div>
+                <div class="label">Bank of Canada Policy Rate</div>
+            </div>
+            <div class="metric-card">
+                <div class="value">2.2%</div>
+                <div class="label">CPI Inflation (October)</div>
+            </div>
+            <div class="metric-card neutral">
+                <div class="value">6.5%</div>
+                <div class="label">Unemployment Rate</div>
+            </div>
+            <div class="metric-card">
+                <div class="value">1.37</div>
+                <div class="label">USD/CAD Exchange Rate</div>
+            </div>
+            <div class="metric-card negative">
+                <div class="value">-2%</div>
+                <div class="label">Housing Price YoY Change</div>
+            </div>
+        </div>
+
+        <section>
+            <h2>1. Canadian Economic Overview</h2>
+
+            <h3>GDP Growth</h3>
+            <p>The Canadian economy has experienced notable volatility in 2025, heavily influenced by U.S. trade policy:</p>
+            <ul>
+                <li><strong>Q3 2025:</strong> GDP expanded at an annualized rate of 2.6%, surprising to the upside</li>
+                <li><strong>October 2025:</strong> The economy contracted 0.3%, the largest monthly decline in nearly three years</li>
+                <li><strong>November 2025:</strong> Preliminary data suggests a modest 0.1% rebound</li>
+                <li><strong>Full Year Projection:</strong> The OECD projects GDP growth of approximately 1.0% for 2025, down from 1.5% in 2024</li>
+            </ul>
+            <p>The economy borrowed growth in Q1 (2.2% annualized) as businesses rushed to get ahead of tariffs, followed by a sharp reversal. Canadian goods exports to the U.S. dropped more than 15% in April alone.</p>
+
+            <h3>Inflation</h3>
+            <p>Inflation has returned to target after the post-pandemic surge:</p>
+            <ul>
+                <li><strong>October 2025:</strong> CPI inflation slowed to 2.2%</li>
+                <li><strong>Core Inflation:</strong> Remains in the 2.5% to 3% range, with underlying inflation around 2.5%</li>
+                <li><strong>Outlook:</strong> The Bank of Canada expects inflation to remain around 2% over the projection horizon</li>
+            </ul>
+
+            <h3>Employment</h3>
+            <p>The labour market has shown recent improvement:</p>
+            <ul>
+                <li><strong>November 2025:</strong> Unemployment rate declined to 6.5%</li>
+                <li><strong>Recent Trend:</strong> After declining through the summer, employment has posted solid gains for three consecutive months</li>
+                <li><strong>Tariff Impact:</strong> U.S. tariffs had near-immediate impacts on jobs in directly affected industries, particularly steel (23,000 jobs at risk) and aluminum (9,500 jobs at risk)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>2. Bank of Canada Monetary Policy</h2>
+
+            <h3>Current Policy Stance</h3>
+            <p>The Bank of Canada held its policy rate steady at <strong>2.25%</strong> on December 10, 2025:</p>
+            <ul>
+                <li><strong>Bank Rate:</strong> 2.5%</li>
+                <li><strong>Deposit Rate:</strong> 2.20%</li>
+                <li><strong>Total Easing Since Peak:</strong> 275 basis points - more than any other G7 nation</li>
+            </ul>
+
+            <h3>Policy Rationale</h3>
+            <p>Governor Tiff Macklem characterized the current rate as "about right" to keep inflation close to 2% while helping the economy through structural adjustment. Key factors supporting the hold:</p>
+            <ul>
+                <li>Q3 GDP growth of 2.6% exceeded expectations</li>
+                <li>Labour market improvement with unemployment falling</li>
+                <li>Inflation returning to target</li>
+                <li>Need to maintain policy flexibility amid U.S. trade uncertainty</li>
+            </ul>
+
+            <h3>Forward Guidance</h3>
+            <p>The Bank stands ready to respond if the outlook changes, but current guidance suggests no near-term moves. Some economists suggest the next move could actually be a hike in the second half of 2026 if inflation pressures emerge.</p>
+            <p><strong>Next Announcement:</strong> January 28, 2026</p>
+        </section>
+
+        <section>
+            <h2>3. Canadian Stock Market (TSX)</h2>
+
+            <h3>Record-Breaking Year</h3>
+            <p>The S&P/TSX Composite Index has delivered exceptional returns in 2025:</p>
+            <ul>
+                <li><strong>Current Level:</strong> Approximately 32,041 points (December 23, 2025)</li>
+                <li><strong>Year-to-Date Return:</strong> Approaching 29%, on track for the strongest annual gain since 2009</li>
+                <li><strong>Record High:</strong> Closed at 31,755.77 on December 20, surpassing 30,000 for the first time in September</li>
+            </ul>
+
+            <h3>Key Drivers</h3>
+            <ol>
+                <li><strong>Bank of Canada Easing:</strong> The aggressive 275 bps of cuts provided substantial support to rate-sensitive sectors</li>
+                <li><strong>Gold Rally:</strong> Safe-haven demand amid geopolitical uncertainty pushed gold to record highs exceeding $4,400/oz</li>
+                <li><strong>Bank Earnings:</strong> Big Six banks managed the mortgage renewal cycle better than expected</li>
+                <li><strong>Technology Outperformance:</strong> Shopify gained approximately 53% YTD</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>4. Canadian Dollar Performance</h2>
+
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>USD/CAD (Current)</td>
+                    <td>1.3705</td>
+                </tr>
+                <tr>
+                    <td>Monthly Gain</td>
+                    <td>+2.86%</td>
+                </tr>
+                <tr>
+                    <td>12-Month Performance</td>
+                    <td>+4.52%</td>
+                </tr>
+                <tr>
+                    <td>2025 Average</td>
+                    <td>1 CAD = 0.7154 USD</td>
+                </tr>
+            </table>
+
+            <h3>Supporting Factors</h3>
+            <ul>
+                <li>Bank of Canada's hawkish hold at 2.25% stabilized rate differentials</li>
+                <li>Resilient economic data curbed expectations for aggressive easing</li>
+                <li>U.S. dollar weakness as cooling labor data raised expectations for additional Fed cuts</li>
+                <li>Trade surplus returning as September exports recovered</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>5. Real Estate Market</h2>
+
+            <h3>National Overview</h3>
+            <ul>
+                <li><strong>National Average Price:</strong> $682,219 (November 2025), down 2% year-over-year</li>
+                <li><strong>Sales-to-New-Listings Ratio:</strong> 52%, indicating balanced conditions</li>
+                <li><strong>Inventory:</strong> 173,000 properties listed nationally, up 8.5% from a year earlier</li>
+            </ul>
+
+            <h3>Property Type Performance</h3>
+            <table>
+                <tr>
+                    <th>Property Type</th>
+                    <th>Average Price</th>
+                    <th>YoY Change</th>
+                </tr>
+                <tr>
+                    <td>Single-Family Homes</td>
+                    <td>$757,200</td>
+                    <td>-2.6%</td>
+                </tr>
+                <tr>
+                    <td>Townhouses/Multiplexes</td>
+                    <td>$619,500</td>
+                    <td>-4.0%</td>
+                </tr>
+                <tr>
+                    <td>Condos</td>
+                    <td>$478,900</td>
+                    <td>-5.2%</td>
+                </tr>
+            </table>
+
+            <h3>2026 Outlook</h3>
+            <ul>
+                <li><strong>Sales Forecast:</strong> Rebound of 7.7% to 509,479 units (highest since 2021)</li>
+                <li><strong>Price Forecast:</strong> National average to increase 3.2% to $698,622</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>6. Key Sectors to Watch</h2>
+
+            <div class="sector-card">
+                <h3>Energy Sector</h3>
+                <p><strong>Strengths:</strong></p>
+                <ul>
+                    <li>Canada remains 4th largest global crude oil producer, 5th largest natural gas producer</li>
+                    <li>Pipeline throughput reached record highs above 4.60 million barrels per day</li>
+                    <li>LNG Canada Phase 1 reached commercial operation in June 2025, exporting 1.9 Bcf/d</li>
+                </ul>
+                <p><strong>Challenges:</strong></p>
+                <ul>
+                    <li>WTI prices have weakened; 2026 futures average approximately US$61/B vs. US$76/B in 2024</li>
+                    <li>Up to 66% of future capital investments at risk of becoming stranded under 1.5C climate scenarios</li>
+                </ul>
+            </div>
+
+            <div class="sector-card">
+                <h3>Banking/Financial Sector</h3>
+                <p><strong>Performance:</strong></p>
+                <ul>
+                    <li>Sector gained nearly 31% in 2025</li>
+                    <li>All Big Six banks reporting strong earnings growth (14-29% revenue growth)</li>
+                    <li>Mortgage renewal cycle managed better than feared</li>
+                </ul>
+                <p><strong>Key Players:</strong></p>
+                <ul>
+                    <li><strong>RBC:</strong> Largest by market cap ($298B), Q4 revenue up 14%, net income up 29%</li>
+                    <li><strong>TD:</strong> Adjusted revenue up 7.6%, net income up 22%</li>
+                    <li><strong>National Bank:</strong> Completed largest-ever acquisition (Canadian Western Bank)</li>
+                </ul>
+            </div>
+
+            <div class="sector-card">
+                <h3>Mining Sector</h3>
+                <p><strong>Gold:</strong></p>
+                <ul>
+                    <li>Canada projected to produce over 200 metric tons in 2025 (top-5 globally)</li>
+                    <li>Gold prices surpassed $3,000/oz for first time in March; now above $4,400/oz</li>
+                    <li>Agnico Eagle posting record free cash flow, $1 billion net cash by June</li>
+                </ul>
+                <p><strong>Copper:</strong></p>
+                <ul>
+                    <li>Prices stabilized above $9,000/tonne</li>
+                    <li>Strategic importance for energy transition (EVs, renewables, grid infrastructure)</li>
+                    <li>Major M&A: Lundin/BHP acquired Filo Corp for $4.1 billion</li>
+                </ul>
+            </div>
+
+            <div class="sector-card">
+                <h3>Technology Sector</h3>
+                <p><strong>Shopify:</strong></p>
+                <ul>
+                    <li>Year-to-date gain of approximately 53%</li>
+                    <li>Q3 revenue up 32% to US$2.8 billion</li>
+                    <li>Black Friday-Cyber Monday sales hit record $14.6 billion</li>
+                    <li>AI-driven traffic surged 7x; AI-driven orders up 11x</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>7. Risks and Opportunities</h2>
+
+            <h3>Key Risks</h3>
+
+            <div class="risk-item">
+                <h4>U.S. Trade Policy Uncertainty</h4>
+                <p>25% tariffs on most Canadian goods remain in effect. Two million Canadian jobs rely on goods exports to the U.S. Trade-sensitive sectors (autos, steel, lumber) remain challenged.</p>
+            </div>
+
+            <div class="risk-item">
+                <h4>Economic Growth Vulnerability</h4>
+                <p>OECD projects only 1.0-1.1% growth through 2026. Exports and business investment expected to decline.</p>
+            </div>
+
+            <div class="risk-item">
+                <h4>Real Estate Market Fragility</h4>
+                <p>Elevated inventory levels with condo sector showing largest price declines. Ontario and BC markets still adjusting.</p>
+            </div>
+
+            <h3>Opportunities</h3>
+
+            <div class="opportunity-item">
+                <h4>Diversification of Trade</h4>
+                <p>Exports to Europe up 22%, Africa up 18%, Central/South America up 11%. LNG exports opening Asian markets.</p>
+            </div>
+
+            <div class="opportunity-item">
+                <h4>Gold as Safe Haven</h4>
+                <p>Record prices supporting mining sector profitability. New mine production coming online. Canadian gold producers well-positioned.</p>
+            </div>
+
+            <div class="opportunity-item">
+                <h4>Critical Minerals Strategy</h4>
+                <p>$4 billion federal strategy positions Canada as global supplier. Growing demand for copper in energy transition.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>8. Investment Considerations</h2>
+
+            <h3>Sector Weightings Framework</h3>
+            <table>
+                <tr>
+                    <th>Sector</th>
+                    <th>Stance</th>
+                    <th>Rationale</th>
+                </tr>
+                <tr>
+                    <td>Financials</td>
+                    <td><span class="badge badge-overweight">Overweight</span></td>
+                    <td>Strong earnings, dividend yields, rate sensitivity</td>
+                </tr>
+                <tr>
+                    <td>Materials (Gold)</td>
+                    <td><span class="badge badge-overweight">Overweight</span></td>
+                    <td>Safe-haven demand, record profitability</td>
+                </tr>
+                <tr>
+                    <td>Energy</td>
+                    <td><span class="badge badge-neutral">Neutral</span></td>
+                    <td>Attractive valuations offset by price risk</td>
+                </tr>
+                <tr>
+                    <td>Technology</td>
+                    <td><span class="badge badge-selective">Selective</span></td>
+                    <td>Shopify quality, broader sector challenged</td>
+                </tr>
+                <tr>
+                    <td>Real Estate</td>
+                    <td><span class="badge badge-underweight">Underweight</span></td>
+                    <td>Weak pricing in major markets, inventory overhang</td>
+                </tr>
+                <tr>
+                    <td>Industrials</td>
+                    <td><span class="badge badge-neutral">Neutral</span></td>
+                    <td>Trade tensions create both risks and opportunities</td>
+                </tr>
+            </table>
+
+            <h3>Strategic Recommendations</h3>
+            <ol>
+                <li><strong>Maintain Balanced Exposure to Canadian Banks</strong> - Strong earnings momentum and dividend yields remain attractive</li>
+                <li><strong>Precious Metals Allocation</strong> - Gold exposure provides portfolio hedge against geopolitical and trade uncertainty</li>
+                <li><strong>Selective Real Estate</strong> - Avoid overweight in condo sector; Prairie markets showing stronger fundamentals</li>
+                <li><strong>Technology: Quality Over Quantity</strong> - Shopify remains premium quality; be selective in broader Canadian tech</li>
+                <li><strong>Energy: Balanced Approach</strong> - Integrated producers better positioned for lower oil prices</li>
+            </ol>
+        </section>
+
+        <div class="sources">
+            <h3>Sources</h3>
+            <ul>
+                <li><a href="https://www.bankofcanada.ca/publications/mpr/mpr-2025-10-29/projections/">Bank of Canada Monetary Policy Report - October 2025</a></li>
+                <li><a href="https://www.bankofcanada.ca/2025/12/fad-press-release-2025-12-10/">Bank of Canada December 2025 Rate Decision</a></li>
+                <li><a href="https://tradingeconomics.com/canada/stock-market">Trading Economics - Canada Stock Market</a></li>
+                <li><a href="https://stats.crea.ca/en-ca/">CREA Statistics - December 2025</a></li>
+                <li><a href="https://energy-information.canada.ca/en/energy-facts/oil-natural-gas-coal">Canadian Centre for Energy Information</a></li>
+                <li><a href="https://www.oecd.org/en/publications/2025/06/oecd-economic-outlook-volume-2025-issue-1_1fd979a8/full-report/canada_1e6fe491.html">OECD Economic Outlook - Canada</a></li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>Report prepared by Nav Financial Strategist | December 23, 2025</p>
+            <p><em>Disclaimer: This report is for informational purposes only and does not constitute financial advice.</em></p>
+        </footer>
+    </div>
+</body>
+</html>
